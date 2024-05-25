@@ -10,42 +10,68 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: rgb(71, 99, 71);
+    background-image: url('https://img.freepik.com/premium-photo/abstract-dark-polygonal-web-background-technology-design-innovation-concept-3d-rendering_670147-6348.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+h2{
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 20px;
     width: 80%;
 }
 
 .box {
-    border: 1px solid #ccc;
+    border: 8px solid grey;
     padding: 20px;
     width: 45%;
     min-height: 300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-}
- h2{
-    text-align: center;
-    margin-bottom: 10px;
+    background: linear-gradient(135deg, #800080, #E6E6FA); 
 }
 
 .product {
+ 
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    padding: 5px;
+    padding: 15px;
     background-color: rgb(74, 178, 178);
 }
 
-.product button {
-    margin: 0 5px;
+
+.product-name, .product-price {
+    width: 30%;
+}
+
+.product-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+}
+
+.product-controls button {
     cursor: pointer;
     background-color: transparent;
     border: none;
-    font-size: x-large;
+   font-size: large;
+    border-radius: 3px;
+    padding: 1px 5px;
+}
+
+.product-controls span {
+    margin: 0 5px;
 }
 
 .cart-product {
@@ -53,15 +79,43 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+    padding: 15px;
+    background-color: rgb(74, 178, 178);
+}
+/* .cart-items{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} */
+h3{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
     padding: 5px;
     background-color: rgb(74, 178, 178);
 }
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; 
+        align-items: center; 
+    }
 
-h3 {
-    margin-top: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding: 5px;
-    background-color: rgb(74, 178, 178);
+    .box {
+        width: 90%; 
+    }
+}
+@media  ( max-width: 768px){   .product{
+        display: flex;
+        gap: 0px;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 5px;
+        background-color: rgb(74, 178, 178);
+    
+
+}.product-controls span {
+    margin: 0 0px;
+}
+    
 }
