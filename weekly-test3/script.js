@@ -16,24 +16,35 @@ function renderProducts() {
         const productDiv = document.createElement('div');
         productDiv.classList.add('product');
         
-        const productInfo = document.createElement('span');
-        productInfo.textContent = `${product.name} - ${product.price}`;
+        const productName = document.createElement('div');
+        productName.classList.add('product-name');
+        productName.textContent = product.name;
+        
+        const productPrice = document.createElement('div');
+        productPrice.classList.add('product-price');
+        productPrice.textContent = product.price;
+        
+        const productControls = document.createElement('div');
+        productControls.classList.add('product-controls');
+        
+        const removeButton = document.createElement('button');
+        removeButton.textContent = '-';
+        removeButton.addEventListener('click', () => removeFromCart(product));
+        
+        const quantitySpan = document.createElement('span');
+        quantitySpan.textContent = cart[product.id] || 0;
         
         const addButton = document.createElement('button');
         addButton.textContent = '+';
         addButton.addEventListener('click', () => addToCart(product));
         
-        const quantitySpan = document.createElement('span');
-        quantitySpan.textContent = cart[product.id] || 0;
+        productControls.appendChild(removeButton);
+        productControls.appendChild(quantitySpan);
+        productControls.appendChild(addButton);
         
-        const removeButton = document.createElement('button');
-        removeButton.textContent = '-';
-        removeButton.addEventListener('click', () => removeFromCart(product, quantitySpan));
-        
-        productDiv.appendChild(productInfo);
-        productDiv.appendChild(removeButton);
-        productDiv.appendChild(quantitySpan);
-        productDiv.appendChild(addButton);
+        productDiv.appendChild(productName);
+        productDiv.appendChild(productPrice);
+        productDiv.appendChild(productControls);
         
         productContainer.appendChild(productDiv);
     });
@@ -48,7 +59,7 @@ function addToCart(product) {
     updateProductQuantity(product);
 }
 
-function removeFromCart(product, quantitySpan) {
+function removeFromCart(product) {
     if (cart[product.id]) {
         cart[product.id]--;
         if (cart[product.id] === 0) {
@@ -62,8 +73,8 @@ function removeFromCart(product, quantitySpan) {
 function updateProductQuantity(product) {
     const productDivs = document.querySelectorAll('.product');
     productDivs.forEach(productDiv => {
-        if (productDiv.firstChild.textContent.startsWith(product.name)) {
-            productDiv.children[2].textContent = cart[product.id] || 0;
+        if (productDiv.querySelector('.product-name').textContent === product.name) {
+            productDiv.querySelector('.product-controls span').textContent = cart[product.id] || 0;
         }
     });
 }
@@ -79,7 +90,17 @@ function renderCart() {
             const product = productsList.find(product => product.id == productId);
             const cartProductDiv = document.createElement('div');
             cartProductDiv.classList.add('cart-product');
-            cartProductDiv.textContent = `${product.name} - ${cart[productId]} x ${product.price} = ${cart[productId] * product.price}`;
+            cartProductDiv.style.display = "flex";
+            cartProductDiv.style.justifyContent = "space-between";
+            
+            const productName = document.createElement('div');
+            productName.textContent = product.name;
+            
+            const productTotal = document.createElement('div');
+            productTotal.textContent = `${cart[productId]} x ${product.price}`;
+            
+            cartProductDiv.appendChild(productName);
+            cartProductDiv.appendChild(productTotal);
             cartContainer.appendChild(cartProductDiv);
         });
     }
